@@ -228,7 +228,7 @@ export class DisplayMapClass extends React.Component {
   render() {
     return (
       // Set a height on the map so it will display
-      <div ref={this.mapRef} style={{ height: "700px" }} />
+      <div ref={this.mapRef} style={{ height: "800px" }} />
     );
   }
 }

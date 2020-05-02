@@ -42,12 +42,12 @@ class HeaderBar extends React.Component {
       <Header aria-label="IBM Platform Name">
         <HeaderName
           href="#"
-          prefix="COVID " >
-          Exposure
+          prefix="Fire " >
+          Spread Tracker
         </HeaderName>
         <HeaderNavigation aria-label="IBM [Platform]">
-          <HeaderMenuItem href="#/map/">View the Spread</HeaderMenuItem>
-          <HeaderMenuItem href="#/log_entry/">Tested Positive?</HeaderMenuItem>
+          <HeaderMenuItem href="#/map/">Track At Risk Locations</HeaderMenuItem>
+          {/* <HeaderMenuItem href="#/log_entry/">At Risk locations</HeaderMenuItem> */}
           {/* <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
           <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
             <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
