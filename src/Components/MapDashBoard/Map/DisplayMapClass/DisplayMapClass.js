@@ -1,6 +1,7 @@
 // src/DisplayMapClass.js
 import * as React from 'react';
 import data from '../../../../fire_archive_M6_121591.json';
+import stations from '../../../../UrbanFireStations.json';
 import './DisplayMapClass.scss';
 
 
@@ -107,6 +108,7 @@ export class DisplayMapClass extends React.Component {
     let location = { lat: "", lng: "" }
     var newdata = JSON.stringify(data);
     var formattedTime;
+    var station;
     let count = 0;
     // console.log(newdata);
 		JSON.parse(newdata, function (key, value) {
@@ -173,6 +175,65 @@ export class DisplayMapClass extends React.Component {
     });
 
     heatmapProvider.addData(locationArray);
+
+    var newdstationsata = JSON.stringify(stations);
+    JSON.parse(newdstationsata, function (key, value) {
+
+      // console.log(key);
+			if (key === "LAT") {
+				// const decimalVal = parseInt(value) * 0.0000001;
+				location.lat = value + "";
+			}
+			if (key === "LONG") {
+				// const decimalVal = parseInt(value) * 0.0000001;
+				location.lng = value + ""; 
+        // console.log("lat: " + location.lat + ", lng: " +location.lng );
+      }
+      // if (key == "startTimestampMs") {
+      //   const unixTimestamp = value; 
+  
+      //       // convert to milliseconds 
+      //       // and then create a new Date object 
+      //       var dateObj = new Date(parseInt(unixTimestamp)); 
+
+      //       //dateObj.toString("MMM dd");
+  
+      //       // Get hours from the timestamp 
+      //       var hours = dateObj.getUTCHours(); 
+  
+      //       // Get minutes part from the timestamp 
+      //       var minutes = dateObj.getUTCMinutes(); 
+  
+      //       // Get seconds part from the timestamp 
+      //       var seconds = dateObj.getUTCSeconds(); 
+  
+      //       formattedTime = dateObj.toDateString() + hours.toString().padStart(2, '0') + ':' + 
+      //           minutes.toString().padStart(2, '0') + ':' + 
+      //           seconds.toString().padStart(2, '0'); 
+      // }
+      if (key === "STATION") {
+        // console.log("lat: " + location.lat + ", lng: " +location.lng );
+
+        station = value;
+        var pngIcon = new H.map.Icon("https://cdn0.iconfinder.com/data/icons/daily-boxes/150/phone-box-32.png", {size: {w: 10, h: 10}});
+
+        var marker = new H.map.Marker({lat: location.lat,lng: location.lng}, {icon: pngIcon}); // { icon: icon}
+
+        marker.setData(station);
+        map.addObject(marker);
+        map.setCenter(location);
+        group.addObject(marker);
+
+//        count = count + 1;
+
+//				locationArray.push({ lat: location.lat, lng: location.lng, value: 1 });
+        // heatmapProvider.addData(locationArray);
+        location = { lat: "", lng: "" }
+
+      }
+    });
+
+
 
      // add 'tap' event listener, that opens info bubble, to the group
     group.addEventListener('tap', function (evt) {
